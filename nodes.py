@@ -66,6 +66,8 @@ class FetchRepo(Node):
 
         # Convert dict to list of tuples: [(path, content), ...]
         files_list = list(result.get("files", {}).items())
+        if len(files_list) == 0:
+            raise(ValueError("Failed to fetch files"))
         print(f"Fetched {len(files_list)} files.")
         return files_list
 
@@ -128,14 +130,16 @@ List of file indices and paths present in the context:
 Format the output as a YAML list of dictionaries:
 
 ```yaml
-- name: Query Processing{name_lang_hint}
+- name: |
+    Query Processing{name_lang_hint}
   description: |
     Explains what the abstraction does.
     It's like a central dispatcher routing requests.{desc_lang_hint}
   file_indices:
     - 0 # path/to/file1.py
     - 3 # path/to/related.py
-- name: Query Optimization{name_lang_hint}
+- name: |
+    Query Optimization{name_lang_hint}
   description: |
     Another core concept, similar to a blueprint for objects.{desc_lang_hint}
   file_indices:
