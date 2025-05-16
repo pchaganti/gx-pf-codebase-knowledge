@@ -52,7 +52,7 @@ def call_llm(prompt: str, use_cache: bool = True) -> str:
     client = genai.Client(
         api_key=os.getenv("GEMINI_API_KEY", "your-api_key"),
     )
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-pro-preview-03-25")
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-pro-preview-05-06")
     response = client.models.generate_content(
         model=model,
         contents=[prompt]
